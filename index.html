@@ -31,7 +31,8 @@ small{font-size:12px}iframe,video{border-radius:8px;background:#000}.bar+div{mar
 .op{display:flex;gap:10px;align-items:center;font-weight:400;font-size:14px;margin:6px 0;padding:9px 12px;border:1px solid var(--b);border-radius:8px;cursor:pointer}.op:has(input:checked){border-color:var(--p);background:var(--pt)}.op:has(input:disabled){cursor:not-allowed;opacity:.6}
 .ft{display:flex;align-items:center;gap:10px;padding-top:16px;flex-wrap:wrap}.ft .m{margin-right:auto}.res{display:flex;align-items:center;gap:20px;padding:16px 0;border-bottom:1px solid var(--b);flex-wrap:wrap}
 .note{display:flex;gap:10px;align-items:center;background:var(--wnb);color:var(--wn);padding:10px 12px;border-radius:8px;margin:14px 0 0;font-weight:500}.note.er{background:var(--erb);color:var(--er)}.rv .qb:last-child{border-bottom:0}
-</style></head><body><div id="app"></div><div id="m"></div>
+.boot{min-height:100vh;display:grid;place-items:center}.spin{width:34px;height:34px;border:3px solid var(--pt);border-top-color:var(--p);border-radius:50%;animation:sp .8s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.spin{animation-duration:2.4s}}
+</style></head><body><div id="app"><div class=boot><span class=spin></span></div></div><div id="m"></div>
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import{getAuth,signInWithEmailAndPassword,signOut,onAuthStateChanged,createUserWithEmailAndPassword}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -213,5 +214,4 @@ const[g,t]=score(c),ok=Math.round(g/t*100)>=c.pass,ans={...S.ans},na=at+1,l=now(
 try{await updateDoc(doc(db,'enrollments',e.id),{answers:ans,score:g,passed:ok,attempted:true,attempts:na,last:l});Object.assign(e,{answers:ans,score:g,passed:ok,attempted:true,attempts:na,last:l});S.qm='result';S.rv=false;draw()}catch(x){console.error(x);alert('Submit failed: '+(x.message||x))}};
 A.rt=()=>{const c=C.find(x=>x.id==S.a),e=E.find(x=>x.id==me.uid+'_'+S.a),p=pcfg(c),tot=c.questions.reduce((s,q)=>s+(+q.marks||0),0);if((e.score||0)>=tot||(!p.unl&&p.max>0&&attemptsOf(e)>=p.max))return;S.ans={};S.qm='take';S.rv=false;draw()};
 A.vw=()=>{S.rv=!S.rv;draw()};
-A.go('login');
 </script></body></html>
